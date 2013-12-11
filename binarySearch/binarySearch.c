@@ -2,8 +2,7 @@
 #include <stdio.h>
 
 void* binarySearch(void* base,void* key,int num,int size,compare* compare){
-   int low = 0,mid,result;
-   int high = num - 1;
+   int low = 0,mid,result,high = num - 1;
    while(low <= high ){
       mid = (low+high)/2;
       result = compare(key,base+(mid*size));
