@@ -19,6 +19,7 @@ bool push(Stack *stack,void* element){
 		return false;
 	stack->top++;
 	address=stack->top*stack->elementSize;
+	printf("%p\n",stack->stack+address );
 	memcpy(stack->stack+address,element,stack->elementSize);
 	return true;
 }

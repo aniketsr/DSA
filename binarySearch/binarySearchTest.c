@@ -10,9 +10,6 @@ int compareInt (void* a, void* b){
 int compareDouble (void* a, void* b){
     return (*(double*)a - *(double*)b);
 }
-int compareChar(void* a, void* b){
-        return (*(char*)a - *(char*)b);
-}
 int compareString(void *a, void *b){ 
          return (strcmp((char *)a,(char *)b));
 }
@@ -71,18 +68,4 @@ void test_8_search_string_element_from_an_array(){
     String* result = binarySearch(elements,&key, 3, sizeof(String), compareString);
     ASSERT(!(strcmp("sumit",*result)));
     ASSERT(&elements[1] == result);
-};
-
-void test_9_search_character_from_an_array(){
-    char elements[3] = {'a','b','c'};
-    char key = 'b';
-    char* result = binarySearch(elements,&key, 3, sizeof(char), compareChar);
-    ASSERT('b' == *result);
-    ASSERT(&elements[1] == result);
-};
-void test_10_search_e_from_the_collection_of_characters_which_is_not_found(){
-    char elements[3] = {'a','b','c'};
-    char key = 's';
-    char* result = binarySearch(elements,&key, 3, sizeof(char), compareChar);
-    ASSERT(NULL == (char*)result);
 };
