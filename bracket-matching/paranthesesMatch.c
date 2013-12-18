@@ -1,4 +1,4 @@
-#include <string.h> // not necessary
+#include <string.h>
 #include "paranthesesMatch.h"
 int isSameParantheses(Stack *stack,char* input){
 	if((*input=='}' && *(char*)top(stack)=='{')

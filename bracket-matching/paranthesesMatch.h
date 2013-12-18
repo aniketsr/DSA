@@ -1,4 +1,4 @@
-#include "../DSA-stack/stackLib.h" 
+#include "../stack/stackLib.h" 
 typedef char String[256];
 
 int isSameParantheses(Stack *stack,char* input);

@@ -69,9 +69,9 @@ int main(){
 		test_insert_multiple_processes_in_scheduler();
 	tearDown();
 	testEnded();
-	testStarted("test_execute_process_in_scheduler");
+	testStarted("test_execute_process_in_schedule");
 	setup();
-		test_execute_process_in_scheduler();
+		test_execute_process_in_schedule();
 	tearDown();
 	testEnded();
 	testStarted("test_execute__two_process_in_scheduler_when_process_is_greater_than_time_quantum");

@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-
 Process* createProcess(String name,int time,int priority){
         Process *process = calloc(1,sizeof(Process));
         memcpy(process->name,name,sizeof(String));
