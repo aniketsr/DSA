@@ -14,7 +14,7 @@ void test_to_create_list(){
         ASSERT(0==start->length);
 }
 
-void test_to_insert_an_element(){
+void test_to_insert_an_element_at_beginning(){
         int data = 2;
         start = create();
         ASSERT(1==insert(start, 0, &data));

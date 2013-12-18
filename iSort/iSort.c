@@ -2,8 +2,7 @@
 #include <memory.h>
 #include "isort.h"
 
-void isort(void* base, size_t numberOfElements, size_t elementSize,
-                        compare comp) {
+void isort(void* base, size_t numberOfElements, size_t elementSize,compare comp) {
     int i, j;
     void* temp = calloc(1, elementSize);
     void* elementToCompare;

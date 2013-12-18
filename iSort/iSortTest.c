@@ -4,11 +4,6 @@
 
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
-typedef struct {
-        int number;
-        char ch;
-} Simple;
-
 int compareIntegers(void* element1,void* element2){
         return *(int*)element1 - *(int*)element2;
 };

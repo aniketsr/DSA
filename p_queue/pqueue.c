@@ -12,7 +12,6 @@ int enqueue(Head* start, Node* element){
         Node* temp = start->head;
         Node* temp2;
         int count=0;
-                        // printf("%d\n", element->priority);
         if(temp == NULL){
                 start->head = element;
                 start->length++;

@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 typedef struct{
-	void *stack;//
+	void *stack;	//stack->stack not readable...e.g stack->elements
 	int elementSize;
 	int length;
 	int top;
