@@ -54,9 +54,9 @@ int main(){
 		test_to_create_list();
 	tearDown();
 	testEnded();
-	testStarted("test_to_insert_an_element");
+	testStarted("test_to_insert_an_element_at_beginning");
 	setup();
-		test_to_insert_an_element();
+		test_to_insert_an_element_at_beginning();
 	tearDown();
 	testEnded();
 	testStarted("test_to_insert_element_at_end_of_linked_list");

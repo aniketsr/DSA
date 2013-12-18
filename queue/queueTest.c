@@ -4,9 +4,14 @@
 #include <stdlib.h>
 typedef char String[256];
 
+Queue* queue;
+
+void tearDown(){
+    free(queue);
+}
+
 void test_1_create_queue_for_ineger(){
 	int i;
-	Queue* queue;
 	int zeroes[]={0,0,0};
 	queue = create(sizeof(int),3);
 	i=memcmp(zeroes,queue->elements,3);
@@ -14,12 +19,10 @@ void test_1_create_queue_for_ineger(){
 	ASSERT(queue->typeSize==4);
 	ASSERT(queue->rear==-1);
 	ASSERT(queue->length==3);
-	free(queue);
 }
 
 void test_2_create_queue_for_float_elements(){
 	float i;
-	Queue* queue;
 	float zeroes[]={0.0,0.0,0.0};
 	queue = create(sizeof(float),3);
 	i=memcmp(zeroes,queue->elements,3);
@@ -31,7 +34,6 @@ void test_2_create_queue_for_float_elements(){
 
 void test_3_create_queue_for_double_elements(){
 	int i;
-	Queue* queue;
 	double zeroes[]={0.0,0.0,0.0};
 	queue = create(sizeof(double),3);
 	i=memcmp(zeroes,queue->elements,3);
@@ -43,7 +45,6 @@ void test_3_create_queue_for_double_elements(){
 
 void test_4_create_queue_for_String_elements(){
 	int i;
-	Queue* queue;
 	String zeroes[]={0,0,0};
 	queue = create(sizeof(String),3);
 	i=memcmp(zeroes,queue->elements,3);
@@ -55,7 +56,6 @@ void test_4_create_queue_for_String_elements(){
 
 void test_5for_insert_int_element_at_front_of_queue(){
 	int i;
-	Queue* queue;
 	int c=5,res;
 	queue = create(sizeof(int),5);
 	res = enqueue(queue,&c);
@@ -68,7 +68,6 @@ void test_5for_insert_int_element_at_front_of_queue(){
 
 void test_6for_insert_float_element_at_front_of_queue(){
 	int i;
-	Queue* queue;
 	int res;
 	float c=5.f;
 	queue = create(sizeof(float),5);
@@ -82,7 +81,6 @@ void test_6for_insert_float_element_at_front_of_queue(){
 
 void test_7for_insert_double_element_at_front_of_queue(){
 	int i;
-	Queue* queue;
 	int res;
 	double c=5.f;
 	queue = create(sizeof(double),5);
@@ -96,7 +94,6 @@ void test_7for_insert_double_element_at_front_of_queue(){
 
 void test_8for_insert_string_element_at_front_of_queue(){
 	int i;
-	Queue* queue;
 	int res;
 	String c="hi";
 	queue = create(sizeof(String),5);	
@@ -109,7 +106,6 @@ void test_8for_insert_string_element_at_front_of_queue(){
 }
 
 void test_9for_delete_intger_from_front_of_queue(){
-	Queue* queue;
 	int d = 6,res;
 	queue = create(sizeof(int),2);
 	enqueue(queue,&d);
@@ -119,7 +115,6 @@ void test_9for_delete_intger_from_front_of_queue(){
 }
 
 void test_10for_delete_float_element_from_front_of_queue(){
-	Queue* queue;
 	float c = 5.0,d = 6.0,res;
 	queue = create(sizeof(float),2);
 	enqueue(queue,&d);
@@ -129,7 +124,6 @@ void test_10for_delete_float_element_from_front_of_queue(){
 }
 
 void test_11for_delete_String_element_from_front_of_queue(){
-	Queue* queue;
 	String c = "hi",d = "hello";
 	void *res;
 	queue = create(sizeof(String),2);

@@ -112,8 +112,6 @@ int main(){
 
 void setup(){}
 
-void tearDown(){}
-
 void fixtureSetup(){}
 
 void fixtureTearDown(){}
