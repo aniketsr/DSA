@@ -12,16 +12,6 @@ void tearDown(){
     free(stack);
 }
 
-typedef struct {
-    int accNo;
-    int balance;
-} Account;
-
-int areAccountsEqual(Account expected,Account actual){
-        return expected.accNo == actual.accNo && expected.balance == actual.balance;
-}
-
-
 void test_creates_a_stack_of_3 (){
         stack = create(3);
         ASSERT(3 == stack->length);
@@ -38,21 +28,21 @@ void test_adds_the_integers_to_stack(){
         ASSERT(1 == stack->length);
 }
 
-void test_adds_the_double_to_yhe_stack(){
+void test_adds_the_double_to_stack(){
         double *nums = malloc(sizeof(double)*2);
-        nums[0] = 34.0;nums[1] = 11.5;
+        nums[0] = 10.10;nums[1] = 20.20;
         stack = create(2);
         push(stack, &nums[0]);
         push(stack, &nums[1]);
-        ASSERT(34.0 == **(double**)getElement(stack, 0));
-        ASSERT(11.5 == **(double**)getElement(stack, 1));
+        ASSERT(10.10 == **(double**)getElement(stack, 0));
+        ASSERT(20.20 == **(double**)getElement(stack, 1));
         ASSERT(2 == stack->top && 2 == stack->length);
 }
 
 void test_adds_Strings_to_stack(){
         String* names = malloc(sizeof(String)*2);
-        strcpy(names[0], "ram");
-        strcpy(names[1], "sham");
+        strcpy(names[0], "abc");
+        strcpy(names[1], "xyz");
         stack = create(2);
         push(stack, &names[0]);
         push(stack, &names[1]);
@@ -63,7 +53,7 @@ void test_adds_Strings_to_stack(){
 void test_doubles_the_length_of_stack_when_stack_is_full(){
     int nums[3];
     int result;
-    nums[0] = 10;nums[1] = 2;nums[2] = 1;
+    nums[0] = 15;nums[1] = 20;nums[2] = 25;
     stack = create(3);
     push(stack, &nums[0]);
     push(stack, &nums[2]);
@@ -72,7 +62,7 @@ void test_doubles_the_length_of_stack_when_stack_is_full(){
     ASSERT(push(stack, &nums[0]));
     ASSERT(6 == stack->length);
     ASSERT(4 == stack->top);
-    ASSERT(10 == **(int**)getElement(stack, 3));
+    ASSERT(15 == **(int**)getElement(stack, 3));
 }
 
 
@@ -93,13 +83,13 @@ void test_pops_the_top_element_from_the_stack(){
 void test_pops_the_top_element_from_the_stack_Strings(){
     String nums[2];
     char* result;
-    strcpy(nums[0], "raman");
-    strcpy(nums[1], "sinu");
+    strcpy(nums[0], "hi");
+    strcpy(nums[1], "helo");
     stack = create(2);
     push(stack, &nums[0]);
     push(stack, &nums[1]);
     result = pop(stack);
-    ASSERT(0 == strcmp("sinu", result));
+    ASSERT(0 == strcmp("helo", result));
     ASSERT(1 == stack->top);
 };
 

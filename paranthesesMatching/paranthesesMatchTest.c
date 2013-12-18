@@ -9,7 +9,7 @@ void test_isParanthesesMatching_will_return_true_for_open_and_closed_brace(){
 	String input = "Object = {};";
 	Stack *stack;
 	bool result;
-	stack = New(sizeof(char),strlen(input));
+	stack = New(sizeof(char),strlen(input));// stack create
 	result = isParanthesesMatching(input, stack);
 	ASSERT(true == result);
 	free(stack->stack);

@@ -1,7 +1,7 @@
 #include <stdbool.h>
 
 typedef struct{
-	void *stack;
+	void *stack;//
 	int elementSize;
 	int length;
 	int top;

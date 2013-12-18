@@ -59,9 +59,9 @@ int main(){
 		test_adds_the_integers_to_stack();
 	tearDown();
 	testEnded();
-	testStarted("test_adds_the_double_to_yhe_stack");
+	testStarted("test_adds_the_double_to_stack");
 	setup();
-		test_adds_the_double_to_yhe_stack();
+		test_adds_the_double_to_stack();
 	tearDown();
 	testEnded();
 	testStarted("test_adds_Strings_to_stack");
