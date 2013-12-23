@@ -84,6 +84,11 @@ int main(){
 		test_to_delete_an_element_from_last();
 	tearDown();
 	testEnded();
+	testStarted("test_iterator_must_traverse_through_list");
+	setup();
+		test_iterator_must_traverse_through_list();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

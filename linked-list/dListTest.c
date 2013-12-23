@@ -1,5 +1,5 @@
 #include "testUtils.h"
-#include "dList.h"
+#include "iterator.h"
 #include <stdlib.h>
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
@@ -70,4 +70,19 @@ void test_to_delete_an_element_from_last(){
         ASSERT(3==dList->length);
         remove(dList, 2        );
         ASSERT(2==dList->length);
+}
+
+void test_iterator_must_traverse_through_list(){
+        List* list = create();
+        Iterator* it;
+        Node* node;
+        int i;
+        int ints[3] = {1,2,3};
+        for (i = 0; i < 3; ++i){
+                insert(list, i, &ints[i]);
+                ASSERT(i+1==*(int*)getElement(list, i));
+        }
+        it = getIterator(list);
+        node = next(it);
+        ASSERT(1 == *(int*)node->data);
 }        

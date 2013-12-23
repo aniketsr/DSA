@@ -1,6 +1,7 @@
-#include "dList.h"
+#include "iterator.h"
 #include <stdlib.h>
 #include <stdlib.h>
+
 
 List* create(){
         List* start = calloc(1,sizeof(List));
@@ -15,37 +16,43 @@ Node* createNode(void* prevAddress,void* nextAddress){
         return newNode;
 }
 
+void* getElement(List* list,int index){
+    int i;
+    Node* node = createNode(NULL,NULL);
+    Node* temp = createNode(NULL,NULL);
+    if(list->head==NULL)    return NULL;
+    temp->next = list->head;
+    for (i = 0; i <= index; ++i){
+        temp = (Node*)temp->next;
+        if(i==index)    return temp->data;
+    }
+    return 0x0;
+}
+
 int insert(List *start, int index, void *data){
-        Node *temp,*head;
-        Node *prev,*next;
+    Node *head=NULL,*previous=NULL,*next=NULL;
         int i;
         head = start->head;
-        for (i = 0; i < index ; ++i){
-        if(head->next != NULL)
-            head = head->next;
+    while(head!= NULL){
+        previous = head;
+        head = head->next;
     }
+    head = previous;
         if(start->length==0){
-                temp = createNode(NULL, NULL);
-                start->head=temp;
-                temp->data=data;
+                start->head = createNode(previous, next);;
+                start->head->data=data;
                 start->length++;        
                 return 1;
         }
         if(start->length == index){
-                temp = createNode(head, NULL);
-        head->next = temp;
-        head->data = data;
+        head->next = createNode(previous, next);
+        head->next->data = data;
         start->length++;
         return 1;
         }
         if(index >= 0 && index < start->length){
-                prev = head;
-                for(i=0;i<index-1;i++){
-                        prev = prev->next;
-                }
-                next = prev->next;
-                temp = createNode(prev, next);
-                head->next = temp;
+                next = previous->next;
+                head->next = createNode(previous, next);
                 head->data = data;
                 start->length ++;
                 return 1;
@@ -54,22 +61,47 @@ int insert(List *start, int index, void *data){
 }
 
 void remove(List *start, int index){
-        Node *temp,*temp2;
-        int count = 1;
-        if(index == 0){
-                start->head = start->head->next;
-                start->length--;
-                return;
-        }
-        temp = start->head;
-        while(count < index){
-                temp = temp->next;
-                count++;
-        }
-        temp2=temp->next;
-        temp->next = temp->next->next;
-        if(temp->next != NULL)
-                temp->next->previous = temp;
-        free(temp2);
-        start->length--;
+    Node *temp,*temp2;
+    int count = 1;
+    if(index == 0){
+            start->head = start->head->next;
+            start->length--;
+            return;
+    }
+    temp = start->head;
+    while(count < index){
+            temp = temp->next;
+            count++;
+    }
+    temp2=temp->next;
+    temp->next = temp->next->next;
+    if(temp->next != NULL)
+            temp->next->previous = temp;
+    free(temp2);
+    start->length--;
+}
+
+Iterator iterator;
+
+Iterator* getIterator(List *list){
+    Iterator *it = (Iterator*)calloc(1, sizeof(Iterator));
+    it->list = create();
+    it->index = 0;
+    it->current = NULL;
+    it->list = list;
+    return it;
+}
+
+int hasNext(Iterator* it){
+    return it->index <= it->list->length; 
+}
+
+Node* next(Iterator *it){
+    int i;
+    Node* node;
+    node = (Node*)it->list->head;
+    for (i = 0; i < it->index; i++)
+        node = node->next;
+    it->index++;
+    return (hasNext(it))?node:NULL; 
 }
