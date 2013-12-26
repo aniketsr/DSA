@@ -23,8 +23,7 @@ int isFull(ArrayList *list) {
 }
 
 int isInputValid(ArrayList *list,int index){
-    int result = (list == NULL ||
-        (index < 0 || index > list->length));
+    int result = (list == NULL || (index < 0 || index > list->length));
     return !result;   
 }
 
@@ -63,8 +62,7 @@ void dispose(ArrayList *list) {
 int add(ArrayList *list,void* data){
     if (list == NULL) return 0;
     increaseCapacity(list);
-    insert(list, list->length, data);
-    return 1;
+     return insert(list, list->length, data);
 }
 
 int remove(ArrayList *list, int index){

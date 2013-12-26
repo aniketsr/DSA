@@ -86,29 +86,29 @@ void test_should_not_insert_when_list_is_null() {
 }
 
 void test_must_enter_data_at_the_end_of_arrayList() {
-    int result = add(internsPtr, &prateek);
-    ASSERT(result == SUCCESS);
-    ASSERT(prateek.age = ((Intern*)get(internsPtr, 0))->age);
+	int result = add(internsPtr, &prateek);
+	ASSERT(result == SUCCESS);
+	ASSERT(prateek.age = ((Intern*)get(internsPtr, 0))->age);
 }
 
 void test_must_remove_the_data_from_the_arrayList() {
-    int result;
-    add(internsPtr, &prateek);
-    result = remove(internsPtr, 0);
-    ASSERT(0==interns.length);
-    ASSERT(result == SUCCESS);
+	int result;
+	add(internsPtr, &prateek);
+	result = remove(internsPtr, 0);
+	ASSERT(0==interns.length);
+	ASSERT(result == SUCCESS);
 }
 
 int compare(void* toCompare, void* compareWith){
-    return ((Intern*)toCompare)->id==((Intern*)compareWith)->id;
+	return ((Intern*)toCompare)->id==((Intern*)compareWith)->id;
 }
 
 void test_must_search_data_from_arrayList(){
-    Intern tanbirka = {43343, "Tanbir Ka"};
-    Intern manish = {43323, "manish Ka"};
-    add(internsPtr, &prateek);
-    add(internsPtr, &ji);
-    add(internsPtr, &tanbirka); 
-    ASSERT(1==search(internsPtr, &tanbirka, compare));
-    ASSERT(0==search(internsPtr, &manish, compare));
+	Intern tanbirka = {43343, "Tanbir Ka"};
+	Intern manish = {43323, "manish Ka"};
+	add(internsPtr, &prateek);
+	add(internsPtr, &ji);
+	add(internsPtr, &tanbirka); 
+	ASSERT(1==search(internsPtr, &tanbirka, compare));
+	ASSERT(0==search(internsPtr, &manish, compare));
 }
