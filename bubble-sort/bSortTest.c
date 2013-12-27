@@ -26,8 +26,9 @@ void test_sort_integers_using_bSort(){
 	for(i = 0; i < noOfElements; i++)
 		actual[i] = &elementsToSort[i];
     bSort(actual,noOfElements,compareIntegers);
-    for(i = 0; i < noOfElements; i++)
-    	ASSERT(expected[i] == *(int*)actual[i]);
+   	ASSERT(expected[0] == *(int*)actual[0]);
+   	ASSERT(expected[1] == *(int*)actual[1]);
+   	ASSERT(expected[2] == *(int*)actual[2]);
 }
 
 void test_sort_chars_using_bSort(){
@@ -37,8 +38,9 @@ void test_sort_chars_using_bSort(){
 	for(i = 0; i < noOfElements; i++)
 		actual[i] = &elementsToSort[i];
     bSort(actual,noOfElements,compareChars);
-    for(i = 0; i < noOfElements; i++)
-    	ASSERT(expected[i] == *(char*)actual[i]);
+   	ASSERT(expected[0] == *(char*)actual[0]);
+   	ASSERT(expected[1] == *(char*)actual[1]);
+   	ASSERT(expected[2] == *(char*)actual[2]);
 }
 
 void test_sort_floats_using_bSort(){
@@ -48,8 +50,9 @@ void test_sort_floats_using_bSort(){
 	for(i = 0; i < noOfElements; i++)
 		actual[i] = &elementsToSort[i];
     bSort(actual,noOfElements,compareFloats);
-    for(i = 0; i < noOfElements; i++)
-    	ASSERT(expected[i] == *(float*)actual[i]);
+   	ASSERT(expected[0] == *(float*)actual[0]);
+   	ASSERT(expected[1] == *(float*)actual[1]);
+   	ASSERT(expected[2] == *(float*)actual[2]);
 }
 
 void test_sort_doubles_using_bSort(){
@@ -59,6 +62,7 @@ void test_sort_doubles_using_bSort(){
 	for(i = 0; i < noOfElements; i++)
 		actual[i] = &elementsToSort[i];
     bSort(actual,noOfElements,compareDoubles);
-    for(i = 0; i < noOfElements; i++)
-    	ASSERT(expected[i] == *(double*)actual[i]);
+   	ASSERT(expected[0] == *(double*)actual[0]);
+   	ASSERT(expected[1] == *(double*)actual[1]);
+   	ASSERT(expected[2] == *(double*)actual[2]);
 }

@@ -16,5 +16,4 @@ void bSort(void** base,int noOfElements, Compare compare){
 			}
 		}
 	}
-
 }
