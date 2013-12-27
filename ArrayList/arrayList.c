@@ -51,7 +51,6 @@ int insert(ArrayList *list, int index, void* data) {
 
 void* get(ArrayList *list, int index) {
 	if (index < 0 || index >= list->length) return NULL;
-
 	return list->base[index];
 }
 
