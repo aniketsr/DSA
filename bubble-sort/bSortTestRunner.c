@@ -54,6 +54,21 @@ int main(){
 		test_sort_integers_using_bSort();
 	tearDown();
 	testEnded();
+	testStarted("test_sort_chars_using_bSort");
+	setup();
+		test_sort_chars_using_bSort();
+	tearDown();
+	testEnded();
+	testStarted("test_sort_floats_using_bSort");
+	setup();
+		test_sort_floats_using_bSort();
+	tearDown();
+	testEnded();
+	testStarted("test_sort_doubles_using_bSort");
+	setup();
+		test_sort_doubles_using_bSort();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();
