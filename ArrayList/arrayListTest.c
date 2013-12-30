@@ -1,114 +1,158 @@
-#include <stdlib.h>
 #include "testUtils.h"
-#include "arrayList.h"
-
-const int SUCCESS = 1;
-const int FAILURE = 0;
-
+#include "ArrayList.h"
+#include <stdlib.h>
+#include <string.h>
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 typedef struct {
-	int id;
-	char* name;
-	int age;
-} Intern;
+        int rollNo;
+        char* name;
+        int marks;
+} sampleData;
 
-Intern prateek = {15386, "Prateek", 18};
-Intern ji = {13432, "Immortal", 17};	
-ArrayList interns;
-ArrayList *internsPtr;
+sampleData first = {1,"Prateek",79};
+sampleData second = {2,"Dubey",80};
+sampleData third = {3,"Manish",90};
 
-void setup() {
-	int noOfElements = 2;	
-	interns = create(noOfElements);
-	internsPtr = &interns;
+const int SUCCESS = 1;
+const int FAILURE = 0;
+List list;
+
+void setup(){
+        int noOfElements = 2;
+        list = create(noOfElements);
 }
 
-void tearDown() {
-	dispose(internsPtr);	
+void tearDown(){
+        dispose(list.base);
 }
 
-void test_insert_element(){
-	int result = insert(internsPtr, 0, &prateek);
-
-	Intern *actual = (Intern*)get(internsPtr, 0);
-	ASSERT(result == SUCCESS);
-	ASSERT(prateek.id == actual->id);
+void test_1_insert_into_array_list(){
+        int result = insert(&list, 0, &first);
+        sampleData* actual = (sampleData*)get(&list, 0);
+        ASSERT(SUCCESS == result);
+        ASSERT(actual->rollNo == first.rollNo);
 }
 
-void test_insert_multiple_elements() {
-	insert(internsPtr, 0, &prateek);
-	insert(internsPtr, 1, &ji);
-	ASSERT(&prateek == get(internsPtr, 0));
-	ASSERT(&ji == get(internsPtr, 1));
+void test_2_insert_multiple_element(){
+        sampleData* actual ;
+        insert(&list, 0, &first);
+        insert(&list, 1, &second);
+        actual = (sampleData*)get(&list, 0);
+        ASSERT(actual->rollNo == first.rollNo);        
+        actual = (sampleData*)get(&list, 1);
+        ASSERT(actual->rollNo == second.rollNo);
 }
 
-void test_interns_grows_beyond_capacity() {
-	int noOfElements = 1;
-	ArrayList list = create(noOfElements);
-	ArrayList *listPtr = &list;
-
-	insert(listPtr, 0, &prateek);
-	insert(listPtr, 1, &ji);
-
-	ASSERT(&prateek == get(listPtr, 0));
-	ASSERT(&ji == get(listPtr, 1));
-
-	dispose(listPtr);		
+void test_3_insert_element_beyond_its_capacity(){
+        sampleData* actual ;
+        insert(&list, 0, &first);
+        insert(&list, 1, &second);
+        insert(&list, 2, &third);
+        actual = (sampleData*)get(&list, 0);
+        ASSERT(actual->rollNo == first.rollNo);        
+        actual = (sampleData*)get(&list, 1);
+        ASSERT(actual->rollNo == second.rollNo);
 }
 
-void test_should_not_insert_at_index_beyond_length() {
-	int result = FAILURE;
-	result = insert(internsPtr, 2, &prateek);
-	ASSERT(result == FAILURE);
+
+void test_4_insert_element_in_between(){
+        sampleData* actual ;
+        add(&list, &first);
+        add(&list, &second);
+        insert(&list, 1, &third);
+        actual = (sampleData*)get(&list, 0);
+        ASSERT(actual->rollNo == first.rollNo);        
+        actual = (sampleData*)get(&list, 1);
+        ASSERT(actual->rollNo == third.rollNo);
+        actual = (sampleData*)get(&list, 2);
+        ASSERT(actual->rollNo == second.rollNo);
 }
 
-void test_should_not_insert_at_negative_index() {
-	int result = FAILURE;
-	result = insert(internsPtr, -1, &prateek);
-	ASSERT(result == FAILURE);
+void test_5_remove_element_from_between(){
+        sampleData* actual ;
+        add(&list, &first);
+        add(&list, &second);
+        add(&list, &third);
+        remove(&list, 1);
+        actual = (sampleData*)get(&list, 0);
+        ASSERT(actual->rollNo == first.rollNo);        
+        actual = (sampleData*)get(&list, 1);
+        ASSERT(actual->rollNo == third.rollNo);
+        actual = (sampleData*)get(&list, 2);
+        ASSERT(actual == NULL);
 }
 
-void test_insert_at_middle_should_shift_the_elements() {
-	Intern tanbirka = {43343, "Tanbir Ka"};
-	insert(internsPtr, 0, &prateek);
-	insert(internsPtr, 1, &ji);
-	insert(internsPtr, 1, &tanbirka);
-	
-	ASSERT(&prateek == get(internsPtr, 0));
-	ASSERT(&tanbirka == get(internsPtr, 1));
-	ASSERT(&ji == get(internsPtr, 2));
+void test_6_remove_element_from_beginning(){
+        sampleData* actual ;
+        add(&list, &first);
+        add(&list, &second);
+        add(&list, &third);
+        remove(&list, 0);
+        actual = (sampleData*)get(&list, 0);
+        ASSERT(actual->rollNo == second.rollNo);        
+        actual = (sampleData*)get(&list, 1);
+        ASSERT(actual->rollNo == third.rollNo);
+        actual = (sampleData*)get(&list, 2);
+        ASSERT(actual == NULL);
 }
 
-void test_should_not_insert_when_list_is_null() {
-	int result = insert(NULL, 1, &prateek);
-	ASSERT(result == FAILURE);
+void test_7_remove_element_from_end(){
+        sampleData* actual ;
+        add(&list, &first);
+        add(&list, &second);
+        add(&list, &third);
+        remove(&list, 2);
+        actual = (sampleData*)get(&list, 0);
+        ASSERT(actual->rollNo == first.rollNo);        
+        actual = (sampleData*)get(&list, 1);
+        ASSERT(actual->rollNo == second.rollNo);
+        actual = (sampleData*)get(&list, 2);
+        ASSERT(actual == NULL);
 }
 
-void test_must_enter_data_at_the_end_of_arrayList() {
-	int result = add(internsPtr, &prateek);
-	ASSERT(result == SUCCESS);
-	ASSERT(prateek.age = ((Intern*)get(internsPtr, 0))->age);
+int comparison (void *valueToBeSearch, void* element){
+        return strcmp((char*)valueToBeSearch,((sampleData*)element)->name);
 }
 
-void test_must_remove_the_data_from_the_arrayList() {
-	int result;
-	add(internsPtr, &prateek);
-	result = remove(internsPtr, 0);
-	ASSERT(0==interns.length);
-	ASSERT(result == SUCCESS);
+void test_8_to_search_into_arrayList(){
+        sampleData* actual;
+        int index ;
+        int expected = 1;
+        char* str = "Dubey";
+        add(&list, &first);
+        add(&list, &second);
+        add(&list, &third);
+        actual = (sampleData*)get(&list, 2);
+        ASSERT(&third == actual);
+        index = search(&list, comparison, str);
+        ASSERT(index == expected);
 }
 
-int compare(void* toCompare, void* compareWith){
-	return ((Intern*)toCompare)->id==((Intern*)compareWith)->id;
+void test_9_insert_element_with_getiterator(){
+        sampleData* temp;
+        int count =0;
+        int expected[]={79 ,80, 90};
+        Iterator it = getIterator(&list);
+        add(&list, &first);
+        add(&list, &second);
+        add(&list, &third);
+        while(it.hasNext(&it)){
+                temp = (sampleData*)it.next(&it);
+                ASSERT(expected[count] == temp->marks);
+                count++;
+        }
 }
 
-void test_must_search_data_from_arrayList(){
-	Intern tanbirka = {43343, "Tanbir Ka"};
-	Intern manish = {43323, "manish Ka"};
-	add(internsPtr, &prateek);
-	add(internsPtr, &ji);
-	add(internsPtr, &tanbirka); 
-	ASSERT(1==search(internsPtr, &tanbirka, compare));
-	ASSERT(0==search(internsPtr, &manish, compare));
+void test_10_insert_element_at_negative_index(){
+        sampleData* actual ;
+        int result = insert(&list, -1, &first);
+        ASSERT(result == FAILURE);
+}
+
+void test_11_to_check_empty_iterator(){
+        sampleData* temp;
+        Iterator it = getIterator(&list);
+        int result = it.hasNext(&it);
+        ASSERT(FAILURE == result);
 }

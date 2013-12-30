@@ -32,10 +32,10 @@ void test_to_insert_element_at_end_of_linked_list(){
 void test_to_insert_element_in_between(){
         int data=2,data2=3;
         dList = create();
-        ASSERT(1==insert(dList, 0, &data));
-        ASSERT(1==insert(dList, 1, &data2));
-        ASSERT(1==insert(dList, 2, &data2));
-        ASSERT(1==insert(dList, 1, &data));
+        ASSERT(1==insert(dList, dList->length, &data));
+        ASSERT(1==insert(dList, dList->length, &data2));
+        ASSERT(1==insert(dList, dList->length, &data2));
+        ASSERT(1==insert(dList, dList->length, &data));
         ASSERT(4==dList->length);
 }
 

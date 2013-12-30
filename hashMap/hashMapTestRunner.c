@@ -49,14 +49,24 @@ int main(){
 	fixtureSetup();
 	resetTestCount();
 
-	testStarted("test_insert_at_root_of_tree");
+	testStarted("test_must_insert_data_into_HashMap");
 	setup();
-		test_insert_at_root_of_tree();
+		test_must_insert_data_into_HashMap();
 	tearDown();
 	testEnded();
-	testStarted("test_insert_array_at_root_of_tree");
+	testStarted("test_must_insert_nultiple_data_into_HashMap");
 	setup();
-		test_insert_array_at_root_of_tree();
+		test_must_insert_nultiple_data_into_HashMap();
+	tearDown();
+	testEnded();
+	testStarted("test_getting_data_from_HashMap");
+	setup();
+		test_getting_data_from_HashMap();
+	tearDown();
+	testEnded();
+	testStarted("test_deleting_data_from_HashMap");
+	setup();
+		test_deleting_data_from_HashMap();
 	tearDown();
 	testEnded();
 

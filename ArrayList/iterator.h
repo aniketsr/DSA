@@ -1,10 +1,7 @@
-#include "tree.h"
-typedef struct {
-	Node* current;
-	List* list;
-	int index;
-} treeIterator;
+typedef struct itrt{
+	int position;
+	void* list;
+	void* (*next)(struct itrt* itr);
+	int (*hasNext)(struct itrt* itr);
 
-treeIterator* getIterator(List *list);
-Node* next(Iterator* it);
-int hasNext(Iterator* it);
+} Iterator;

@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <stdlib.h>
 
-
 List* create(){
         List* start = calloc(1,sizeof(List));
         start->length=0;
@@ -31,33 +30,33 @@ void* getElement(List* list,int index){
 
 int insert(List *start, int index, void *data){
     Node *head=NULL,*previous=NULL,*next=NULL;
-        int i;
-        head = start->head;
+    int i;
+    head = start->head;
     while(head!= NULL){
         previous = head;
         head = head->next;
     }
     head = previous;
-        if(start->length==0){
-                start->head = createNode(previous, next);;
-                start->head->data=data;
-                start->length++;        
-                return 1;
-        }
-        if(start->length == index){
+    if(start->length==0){
+        start->head = createNode(previous, next);
+        start->head->data=data;
+        start->length++;        
+        return 1;
+    }
+    if(start->length == index){
         head->next = createNode(previous, next);
         head->next->data = data;
         start->length++;
         return 1;
-        }
-        if(index >= 0 && index < start->length){
-                next = previous->next;
-                head->next = createNode(previous, next);
-                head->data = data;
-                start->length ++;
-                return 1;
-        }
-        return 1;        
+    }
+    if(index >= 0 && index < start->length){
+        next = previous->next;
+        head->next = createNode(previous, next);
+        head->data = data;
+        start->length ++;
+        return 1;
+    }
+    return 1;        
 }
 
 void remove(List *start, int index){
@@ -80,6 +79,11 @@ void remove(List *start, int index){
     free(temp2);
     start->length--;
 }
+
+void Free(List* list){
+    while(list->length>0)
+        remove(list,0);
+};
 
 Iterator iterator;
 

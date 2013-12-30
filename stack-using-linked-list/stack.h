@@ -1,4 +1,4 @@
-#include "../linked-list/dList.h"
+#include "dList.h"
 
 typedef List Stack;
 typedef char String[256];

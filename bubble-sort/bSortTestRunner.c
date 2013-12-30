@@ -69,6 +69,11 @@ int main(){
 		test_sort_doubles_using_bSort();
 	tearDown();
 	testEnded();
+	testStarted("test_sort_strings_using_bSort");
+	setup();
+		test_sort_strings_using_bSort();
+	tearDown();
+	testEnded();
 
 	summarizeTestCount();
 	fixtureTearDown();

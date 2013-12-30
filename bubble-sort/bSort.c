@@ -12,7 +12,7 @@ void bSort(void** base,int noOfElements, Compare compare){
 			if(compareResult > 0){
 				temp = base[j];
 				base[j] = base[j+1];
-				base[j+1] = temp;				
+				base[j+1] = temp;
 			}
 		}
 	}

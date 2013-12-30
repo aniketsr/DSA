@@ -2,6 +2,7 @@
 #include "bSort.h"
 #include <stdio.h>
 #include <string.h>
+typedef char String[256];
 //create setup, tearDown, fixtureSetup, fixtureTearDown methods if needed
 
 int compareIntegers(void* element1,void* element2){
@@ -13,22 +14,26 @@ int compareChars(void* element1,void* element2){
 };
 
 int compareFloats(void* element1,void* element2){
-        return *(float*)element1 - *(float*)element2;
+    return *(float*)element1 - *(float*)element2;
 };
 
 int compareDoubles(void* element1,void* element2){
-        return *(double*)element1 - *(double*)element2;
+    return *(double*)element1 - *(double*)element2;
+};
+
+int compareStrings(void* element1,void* element2){
+    return strcmp(*(String*)element1,*(String*)element2);
 };
 
 void test_sort_integers_using_bSort(){
-	int i,noOfElements = 3,elementsToSort[] = {2,1,3}, expected[] = {1,2,3};
-	void *actual[3];
-	for(i = 0; i < noOfElements; i++)
-		actual[i] = &elementsToSort[i];
-    bSort(actual,noOfElements,compareIntegers);
-   	ASSERT(expected[0] == *(int*)actual[0]);
-   	ASSERT(expected[1] == *(int*)actual[1]);
-   	ASSERT(expected[2] == *(int*)actual[2]);
+  int i,noOfElements = 3,elementsToSort[] = {2,1,3}, expected[] = {1,2,3};
+  void *actual[3];
+  for(i = 0; i < noOfElements; i++)
+    actual[i] = &elementsToSort[i];
+  bSort(actual,noOfElements,compareIntegers);
+  ASSERT(expected[0] == *(int*)actual[0]);
+  ASSERT(expected[1] == *(int*)actual[1]);
+  ASSERT(expected[2] == *(int*)actual[2]);
 }
 
 void test_sort_chars_using_bSort(){
@@ -65,4 +70,17 @@ void test_sort_doubles_using_bSort(){
    	ASSERT(expected[0] == *(double*)actual[0]);
    	ASSERT(expected[1] == *(double*)actual[1]);
    	ASSERT(expected[2] == *(double*)actual[2]);
+}
+
+void test_sort_strings_using_bSort(){
+  int i,noOfElements = 3;
+  String elementsToSort[] = {"survase", "balasaheb", "aniket"}, 
+  expected[] = {"aniket", "balasaheb", "survase"};
+  void *actual[3];
+  for(i = 0; i < noOfElements; i++)
+    actual[i] = &elementsToSort[i];
+    bSort(actual,noOfElements,compareStrings);
+    ASSERT(0 == strcmp(expected[0],*(String*)actual[0]));
+    ASSERT(0 == strcmp(expected[1],*(String*)actual[1]));
+    ASSERT(0 == strcmp(expected[2],*(String*)actual[2]));
 }

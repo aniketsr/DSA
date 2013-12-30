@@ -1,86 +1,94 @@
-#include "arrayList.h"
+#include "ArrayList.h"
 #include <stdlib.h>
-
-ArrayList create(int capacity) {
-	ArrayList list;
-	list.base = (void*)malloc(sizeof(void*) * capacity);
-	list.capacity = capacity;
-	list.length = 0;
-	return list;
+List create(int capacity){
+    List list;
+    list.base = malloc((capacity+1)*sizeof(void *));
+    list.base[0] = NULL;
+    list.capacity = capacity;
+    list.length = 0;
+    return list;
 }
 
-void shiftElementsIfNeeded(ArrayList *list, int index) {
-	int i;
-	if (index < list->length) {
-		for (i = list->length - 1; i >= index; i--) {
-			list->base[i+1] = list->base[i];
-		}
-	}	
+void reallocateIfNeeded(List* list, int index){
+    int targetCapacity;
+    if(list->length >= list->capacity){
+        targetCapacity = 2 * list->capacity;
+        list->base = realloc(list->base, targetCapacity);
+        list->capacity = targetCapacity;
+    }
 }
 
-int isFull(ArrayList *list) {
-	return list->length == list->capacity;
+void slideElementToRightIfNeed(List* list, int index){
+    int count;
+    if(index < list->length){
+        list->base[list->length+1] = NULL;
+        for (count = list->length; count > index; --count){
+            list->base[count] = list->base[count-1];
+        }
+    }
 }
 
-int isInputValid(ArrayList *list,int index){
-    int result = (list == NULL || (index < 0 || index > list->length));
-    return !result;   
-}
-
-void increaseCapacity(ArrayList *list) {
-	int targetCapacity;
-	if (isFull(list)) {
-		targetCapacity = list->capacity * 2;
-		list->base = realloc(list->base, targetCapacity * sizeof(void*));
-		list->capacity = targetCapacity;
-	}	
-}
-
-int insert(ArrayList *list, int index, void* data) {
-	if (list == NULL) return 0;
-	if (index < 0 || index > list->length) return 0;
-
-	increaseCapacity(list);
-	shiftElementsIfNeeded(list, index);
-
-	list->base[index] = data;
-	list->length++;
-
-	return 1;
-}
-
-void* get(ArrayList *list, int index) {
-	if (index < 0 || index >= list->length) return NULL;
-	return list->base[index];
-}
-
-void dispose(ArrayList *list) {
-	free(list->base);
-}
-
-int add(ArrayList *list,void* data){
-    if (list == NULL) return 0;
-    increaseCapacity(list);
-     return insert(list, list->length, data);
-}
-
-int remove(ArrayList *list, int index){
-    int i;
-    int Valid = isInputValid(list, index);
-    if (!Valid)return 0;
-    for (i = index; i < list->length; ++i)
-        list->base[i] = list->base[i+1];
-    list->length--;
+int add(List* list, void* data){
+    reallocateIfNeeded(list, list->length);
+    list->base[list->length] = data;
+    list->base[list->length+1] = NULL;
+    list->length++;
     return 1;
 }
 
-int search(ArrayList *list, void *data,Comparator* compare){
-    int i;
-    int result;
-    if (list == NULL)return 0;
-    for (i = 0; i < list->length; ++i){
-        result = compare(list->base[i],data);
-        if (result)return result;
-    }
-    return 0;
+int insert(List* list, int index, void* data){
+    if(index < 0) return 0;
+    reallocateIfNeeded(list, index);
+    slideElementToRightIfNeed(list, index);
+    list->base[index] = data;
+    list->length++;
+    return 1;
+}
+
+void* get(List *list, int index){        
+    return list->base[index];
+}
+
+int remove(List* list, int index){
+    int count;
+    if(index >= list->length)
+        return 0;
+    for(count = index; count < list->length-1 ; count++)
+        list->base[count] = list->base[count+1];
+    list->base[list->length-1] = NULL;
+    return 1;
+}
+
+int search(List *list, Compare areEqual, void *elementToBeSearch){
+        int count;
+        for(count = 0 ; count < list->length ; count ++){
+                 if(!areEqual(elementToBeSearch,list->base[count]))
+                        return count;
+        }
+        return -1;
+}
+
+void dispose(void* ptr){
+        free(ptr);
+}
+
+int hasnext (Iterator* it){
+        List* temp = (List*)it->list;
+        if(temp->base[it->position+1] != NULL)
+                return 1;
+        return 0;
+}
+
+void* giveNextElement(Iterator* it){
+        List* temp = (List*)it->list;
+        return temp->base[++it->position];        
+}
+
+Iterator getIterator(List* list){
+        Iterator it;
+        it.position = -1;
+        it.list = list;
+        it.hasNext = hasnext;
+        it.next = giveNextElement;
+        return it;
 }
