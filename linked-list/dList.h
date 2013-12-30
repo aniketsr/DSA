@@ -11,6 +11,6 @@ typedef struct {
 
 List* create();
 int insert(List* start, int index, void* data);
-void remove(List* start, int index);
+int remove(List* start, int index);
 void* getElement(List* list,int index);
 void Free(List* list);

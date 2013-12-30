@@ -59,13 +59,13 @@ int insert(List *start, int index, void *data){
     return 1;        
 }
 
-void remove(List *start, int index){
+int remove(List *start, int index){
     Node *temp,*temp2;
     int count = 1;
     if(index == 0){
             start->head = start->head->next;
             start->length--;
-            return;
+            return 0;
     }
     temp = start->head;
     while(count < index){
@@ -78,6 +78,7 @@ void remove(List *start, int index){
             temp->next->previous = temp;
     free(temp2);
     start->length--;
+    return 1;
 }
 
 void Free(List* list){
