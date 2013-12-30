@@ -13,12 +13,12 @@ HashMap* createHashMap(HashCodeGenerator hash, Compare compare){
 
 int getIndex(List* bucket,void* key,Compare compare){
     int i;
-    Object* object;
+    hashElement* element;
     Node* node = bucket->head;
     for(i = 0;i<bucket->length;i++){
         if(NULL == node) return -1;
-        object = node->data;
-        if(0 == compare(object->key,key)) return i;
+        element = node->data;
+        if(0 == compare(element->key,key)) return i;
         node = node->next;
     }        
     return -1;
@@ -26,13 +26,13 @@ int getIndex(List* bucket,void* key,Compare compare){
 
 void* search(List* bucket,void* key,Compare compare){
     int i;
-    Object* object;
+    hashElement* element;
     Node* node = bucket->head;
     for(i = 0;i<bucket->length;i++){
         if(NULL == node) return NULL;
-        object = node->data;
-        if(0 == compare(object->key,key))
-            return object->value;
+        element = node->data;
+        if(0 == compare(element->key,key))
+            return element->value;
         node =node->next;
     }
     return NULL;
@@ -44,10 +44,10 @@ List* getBucket(HashMap* map,void* key){
 };
 int put(HashMap* map,void* key,void* value){
     List* Bucket = getBucket(map,key);
-    Object* object =calloc(1,sizeof(Object));
-    object->key =key;
-    object->value =value;
-    return insert(Bucket,Bucket->length,object);
+    hashElement* element =calloc(1,sizeof(hashElement));
+    element->key =key;
+    element->value =value;
+    return insert(Bucket,Bucket->length,element);
 };
 
 void* get(HashMap* map,void* key){

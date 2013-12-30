@@ -4,7 +4,7 @@
 typedef struct {
 	void* key;
 	void* value;
-}Object;
+}hashElement;
 
-Object* createObject(void* key,void* value);
+hashElement* createObject(void* key,void* value);
 void* search(List* bucket,void* key, Compare compare );

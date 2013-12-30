@@ -59,14 +59,19 @@ int main(){
 		test_must_insert_nultiple_data_into_HashMap();
 	tearDown();
 	testEnded();
-	testStarted("test_getting_data_from_HashMap");
+	testStarted("test_must_not_insert_duplicate_data_into_HashMap");
 	setup();
-		test_getting_data_from_HashMap();
+		test_must_not_insert_duplicate_data_into_HashMap();
 	tearDown();
 	testEnded();
-	testStarted("test_deleting_data_from_HashMap");
+	testStarted("test_must_get_data_from_HashMap");
 	setup();
-		test_deleting_data_from_HashMap();
+		test_must_get_data_from_HashMap();
+	tearDown();
+	testEnded();
+	testStarted("test_must_delete_data_from_HashMap");
+	setup();
+		test_must_delete_data_from_HashMap();
 	tearDown();
 	testEnded();
 
