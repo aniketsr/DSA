@@ -54,9 +54,9 @@ void* get(HashMap* map,void* key){
     return search(getBucket(map,key),key,map->compare);
 };
 
-void removeKey(HashMap* map,void* key){
+int removeKey(HashMap* map,void* key){
     List* Bucket = getBucket(map,key);
-    remove(Bucket,getIndex(Bucket,key,map->compare));
+    return remove(Bucket,getIndex(Bucket,key,map->compare));
 };
 
 void dispose(HashMap* map){
